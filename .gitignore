@@ -137,3 +137,11 @@ LeagueManager/.idea/compiler.xml
 
 #node server
 LeagueManager/node_modules/
+*.csproj
+*.xml
+Library
+UserSettings
+Temp
+obj
+Logs
+.idea
