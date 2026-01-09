@@ -23,12 +23,12 @@ namespace OtabapaLeague.Domain.SceneLoader
 
         public async UniTask LoadUIScene()
         {
-            await SceneManager.LoadSceneAsync(_settings.UISceneName);
+            await SceneManager.LoadSceneAsync(_settings.UISceneName, LoadSceneMode.Additive);
         }
 
         public async UniTask LoadMainScene()
         {
-            await SceneManager.LoadSceneAsync(_settings.MainSceneName);
+            await SceneManager.LoadSceneAsync(_settings.MainSceneName, LoadSceneMode.Additive);
         }
     }
 }

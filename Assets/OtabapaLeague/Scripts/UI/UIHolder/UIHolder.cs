@@ -17,7 +17,7 @@ namespace OtabapaLeague.Scripts.Domain.UIController
             return UniTask.CompletedTask;
         }
 
-        public void AddView(View view, string viewName)
+        public void AddView(string viewName, View view)
         {
             _views.Add(viewName, view);
             view.transform.SetParent(_uiParent.ScreenParent, false);

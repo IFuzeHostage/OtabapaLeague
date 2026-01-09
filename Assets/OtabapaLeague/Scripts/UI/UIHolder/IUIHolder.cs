@@ -7,7 +7,7 @@ namespace OtabapaLeague.Scripts.Domain.UIController
     public interface IUIHolder
     {
         UniTask Init(UIParent uiParent);
-        void AddView(View view, string viewName);
+        void AddView(string viewName, View view);
         void RemoveView(string view);
         View GetView(string viewName);
     }

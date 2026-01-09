@@ -10,17 +10,17 @@ namespace OtabapaLeague.Scripts.Domain.ScenePresenters
         [SerializeField]
         private UIParent _uiRoot;
         
-        private ISceneLoader _sceneLoader;
+        private IUIHolder _uiHolder;
         
         [Inject]
-        public void Construct(ISceneLoader sceneLoader)
+        public void Construct(IUIHolder uiHolder)
         {
-            _sceneLoader = sceneLoader;
+            _uiHolder = uiHolder;   
         }
 
         private void Awake()
         {
-            
+            _uiHolder.Init(_uiRoot);
         }
     }
 }

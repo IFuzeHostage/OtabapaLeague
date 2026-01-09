@@ -17,6 +17,7 @@ namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
         {
             _presenter = presenter;
             _presenter.SetView(this);
+            Init();
         }
 
         public void SetTabName(int index, string tabName)
