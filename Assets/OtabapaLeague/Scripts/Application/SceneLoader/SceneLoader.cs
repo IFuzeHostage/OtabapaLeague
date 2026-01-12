@@ -1,9 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
-using OtabapaLeague.Domain.SettingsLoader;
-using OtabapaLeague.Scripts.Data.SceneLoader;
+using OtabapaLeague.Data.SceneLoader;
+using OtabapaLeague.Data.Settings;
 using UnityEngine.SceneManagement;
 
-namespace OtabapaLeague.Domain.SceneLoader
+namespace OtabapaLeague.Application.SceneLoader
 {
     public class SceneLoader : ISceneLoader
     {

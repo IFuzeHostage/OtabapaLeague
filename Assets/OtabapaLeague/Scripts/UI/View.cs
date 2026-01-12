@@ -1,20 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
+using OtabapaLeague.Application.UI.Elements;
 using UnityEngine;
 
-namespace OtabapaLeague.Scripts.UI
+namespace OtabapaLeague.Application.UI
 {
-    public abstract class View : MonoBehaviour
+    public abstract class View : UIElement
     {
-        public RectTransform Rect => _rectTransform;
-        
-        private RectTransform _rectTransform;
         private CanvasGroup _canvasGroup;
-        
-        protected void Init()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-            _canvasGroup = GetComponent<CanvasGroup>();
-        }
 
         public virtual UniTask Open()
         {
@@ -26,6 +18,12 @@ namespace OtabapaLeague.Scripts.UI
         {
             _canvasGroup.alpha = 0;
             return UniTask.CompletedTask;
+        }
+
+        protected override void InitComponents()
+        {
+            base.InitComponents();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
     }
 }

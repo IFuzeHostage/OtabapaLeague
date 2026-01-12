@@ -1,8 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using OtabapaLeague.Scripts.UI;
-using UnityEngine;
+using OtabapaLeague.Scripts.Domain.UIController;
 
-namespace OtabapaLeague.Scripts.Domain.UIController
+namespace OtabapaLeague.Application.UI
 {
     public interface IUIHolder
     {

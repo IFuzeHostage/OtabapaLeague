@@ -1,4 +1,4 @@
-﻿namespace OtabapaLeague.Scripts.Data
+﻿namespace OtabapaLeague.Data
 {
     public interface ISettingsData
     {

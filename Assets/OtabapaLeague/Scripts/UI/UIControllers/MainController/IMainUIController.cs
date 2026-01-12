@@ -1,10 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace OtabapaLeague.Scripts.UI.UIControllers.MainController
+namespace OtabapaLeague.Application.UI
 {
     public interface IMainUIController
     {
         UniTask OpenMainMenu();
         UniTask CloseMainMenu();
+
+        UniTask OpenPlayersWindow();
+        UniTask ClosePlayersWindow();
     }
 }

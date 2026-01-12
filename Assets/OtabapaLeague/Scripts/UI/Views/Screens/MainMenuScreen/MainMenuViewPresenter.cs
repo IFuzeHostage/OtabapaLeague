@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 
-namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
+namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
 {
-    public class MainMenuPresenter : ViewPresenter<MainMenuView>
+    public class MainMenuViewPresenter : ViewPresenter<MainMenuView>
     {
+        private IMainUIController _mainUIController;
+        
+        public MainMenuViewPresenter(IMainUIController mainUIController)
+        {
+            _mainUIController = mainUIController;
+        }
+        
         public override void OnViewReady()
         {
             for(int i = 0; i < 3; i++)
@@ -28,7 +35,7 @@ namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
                     Debug.Log("Open Games Tab");
                     break;
                 case MainMenuTabs.Players:
-                    Debug.Log("Open Players Tab");
+                    _mainUIController.OpenPlayersWindow();
                     break;
                 case MainMenuTabs.Rating:
                     Debug.Log("Open Rating Tab");

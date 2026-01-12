@@ -1,13 +1,14 @@
 ﻿using Cysharp.Threading.Tasks;
-using OtabapaLeague.Domain.SceneLoader;
+using OtabapaLeague.Application.SceneLoader;
 using UnityEngine;
 using Zenject;
 
-namespace OtabapaLeague.Scripts.Domain.ScenePresenters
+namespace OtabapaLeague.Application.ScenePresenters
 {
     public class ApplicationPresenter : MonoBehaviour
     {
-        private ISceneLoader _sceneLoader;
+        private 
+            ISceneLoader _sceneLoader;
         
         [Inject]
         private void Construct(ISceneLoader sceneLoader)

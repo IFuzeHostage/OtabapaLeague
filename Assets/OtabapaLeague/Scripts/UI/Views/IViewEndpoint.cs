@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace OtabapaLeague.Scripts.UI.Views
+namespace OtabapaLeague.Application.UI
 {
     public interface IViewEndpoint
     {

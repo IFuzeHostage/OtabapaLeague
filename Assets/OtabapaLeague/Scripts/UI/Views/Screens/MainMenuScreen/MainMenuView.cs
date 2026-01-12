@@ -1,8 +1,8 @@
 ﻿using System;
-using OtabapaLeague.Scripts.UI.Elements;
+using OtabapaLeague.Application.UI.Elements;
 using UnityEngine;
 
-namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
+namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
 {
     public class MainMenuView : View
     {
@@ -11,13 +11,12 @@ namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
         [SerializeField] 
         private TabGroup _tabs;
 
-        private MainMenuPresenter _presenter;
+        private MainMenuViewPresenter _presenter;
         
-        public void Init(MainMenuPresenter presenter)
+        public void Init(MainMenuViewPresenter presenter)
         {
             _presenter = presenter;
             _presenter.SetView(this);
-            Init();
         }
 
         public void SetTabName(int index, string tabName)
@@ -27,7 +26,6 @@ namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
         
         private void Awake()
         {
-            Init();
             _tabs.OnTabChanged += OnTabChanged;
         }
 

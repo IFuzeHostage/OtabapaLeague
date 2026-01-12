@@ -1,9 +1,9 @@
-﻿using OtabapaLeague.Domain.SceneLoader;
+﻿using OtabapaLeague.Application.UI;
 using OtabapaLeague.Scripts.Domain.UIController;
 using UnityEngine;
 using Zenject;
 
-namespace OtabapaLeague.Scripts.Domain.ScenePresenters
+namespace OtabapaLeague.Application.ScenePresenters
 {
     public class UIPresenter : MonoBehaviour
     {

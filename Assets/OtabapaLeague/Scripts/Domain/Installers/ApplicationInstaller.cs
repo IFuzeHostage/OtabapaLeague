@@ -1,9 +1,8 @@
-﻿using OtabapaLeague.Domain.SceneLoader;
-using OtabapaLeague.Domain.SettingsLoader;
-using OtabapaLeague.Scripts.Domain.UIController;
+﻿using OtabapaLeague.Application.SceneLoader;
+using OtabapaLeague.Data.Settings;
 using Zenject;
 
-namespace OtabapaLeague.Scripts.Installers
+namespace OtabapaLeague.Domain.Installers
 {
     public class ApplicationInstaller : MonoInstaller
     {

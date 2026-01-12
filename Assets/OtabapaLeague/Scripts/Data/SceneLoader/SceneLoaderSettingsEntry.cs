@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OtabapaLeague.Scripts.Data.SceneLoader
+namespace OtabapaLeague.Data.SceneLoader
 {
     [CreateAssetMenu(menuName = "OtabapaLeague/Data/SceneLoader", fileName = PATH)]
     public class SceneLoaderSettingsEntry : SettingsScriptableObject

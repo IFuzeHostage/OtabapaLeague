@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using OtabapaLeague.Scripts.Domain.UIController;
 using UnityEngine;
 
-namespace OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen
+namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
 {
     public class MainMenuEndpoint : IMainMenuEndpoint
     {

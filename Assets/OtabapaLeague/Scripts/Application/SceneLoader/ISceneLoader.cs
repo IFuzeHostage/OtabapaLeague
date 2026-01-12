@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace OtabapaLeague.Domain.SceneLoader
+namespace OtabapaLeague.Application.SceneLoader
 {
     public interface ISceneLoader
     {

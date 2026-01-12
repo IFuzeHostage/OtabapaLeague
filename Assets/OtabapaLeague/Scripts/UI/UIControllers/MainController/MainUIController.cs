@@ -1,11 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
-using OtabapaLeague.Scripts.UI.Views.Screens.MainMenuScreen;
+using OtabapaLeague.Application.UI.Screens.MainMenuScreen;
+using OtabapaLeague.Application.UI.Screens.PlayersWindow;
 
-namespace OtabapaLeague.Scripts.UI.UIControllers.MainController
+namespace OtabapaLeague.Application.UI.UIControllers.MainController
 {
     public class MainUIController : IMainUIController
     {
         private readonly IMainMenuEndpoint _mainMenuEndpoint;
+        private readonly IPlayersWindowEndpoint _playersWindowEndpoint;
         
         public MainUIController(IMainMenuEndpoint mainMenuEndpoint)
         {
@@ -20,6 +22,16 @@ namespace OtabapaLeague.Scripts.UI.UIControllers.MainController
         public async UniTask CloseMainMenu()
         {
             await _mainMenuEndpoint.Close();
+        }
+
+        public async UniTask OpenPlayersWindow()
+        {
+            await _playersWindowEndpoint.Open();
+        }
+
+        public async UniTask ClosePlayersWindow()
+        {
+            await _playersWindowEndpoint.Close();
         }
     }
 }

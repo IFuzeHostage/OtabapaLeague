@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using OtabapaLeague.Scripts.Data;
 
-namespace OtabapaLeague.Domain.SettingsLoader
+namespace OtabapaLeague.Data.Settings
 {
     public interface ISettingsLoader
     {

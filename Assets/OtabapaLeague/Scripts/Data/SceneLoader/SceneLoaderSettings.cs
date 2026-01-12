@@ -1,4 +1,4 @@
-﻿namespace OtabapaLeague.Scripts.Data.SceneLoader
+﻿namespace OtabapaLeague.Data.SceneLoader
 {
     public class SceneLoaderSettings : ISettingsData
     {

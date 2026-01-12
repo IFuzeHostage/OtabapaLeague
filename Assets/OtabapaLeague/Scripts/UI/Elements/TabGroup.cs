@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OtabapaLeague.Scripts.UI.Elements
+namespace OtabapaLeague.Application.UI.Elements
 {
     public class TabGroup : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace OtabapaLeague.Scripts.UI.Elements
         public int ButtonCount => _buttons.Count;
         
         [SerializeField]
-        private List<UIButton> _buttons;
+        private List<TextButton> _buttons;
 
         public void SetButtonAtIndex(int buttonIndex, string buttonText)
         {

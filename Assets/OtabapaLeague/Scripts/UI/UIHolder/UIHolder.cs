@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using OtabapaLeague.Scripts.UI;
+using OtabapaLeague.Scripts.Domain.UIController;
 using UnityEngine;
 
-namespace OtabapaLeague.Scripts.Domain.UIController
+namespace OtabapaLeague.Application.UI
 {
     public class UIHolder : IUIHolder
     {

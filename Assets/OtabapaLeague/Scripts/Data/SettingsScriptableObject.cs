@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OtabapaLeague.Scripts.Data
+namespace OtabapaLeague.Data
 {
     public abstract class SettingsScriptableObject : ScriptableObject
     {

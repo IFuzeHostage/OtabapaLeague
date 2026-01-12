@@ -1,4 +1,4 @@
-﻿namespace OtabapaLeague.Scripts.UI
+﻿namespace OtabapaLeague.Application.UI
 {
     public abstract class ViewPresenter<T> where T : View
     {

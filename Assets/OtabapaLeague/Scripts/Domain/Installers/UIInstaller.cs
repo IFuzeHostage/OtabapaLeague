@@ -1,7 +1,7 @@
 using OtabapaLeague.Scripts.Domain.UIController;
 using Zenject;
 
-namespace OtabapaLeague.Scripts.Installers
+namespace OtabapaLeague.Domain.Installers
 {
     public class UIInstaller : MonoInstaller
     {
