@@ -37,5 +37,10 @@ namespace OtabapaLeague.Application.UI
         {
             return _views[viewName];
         }
+
+        public bool TryGetView(string viewName, out View view)
+        {
+            return _views.TryGetValue(viewName, out view);
+        }
     }
 }

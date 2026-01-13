@@ -9,5 +9,6 @@ namespace OtabapaLeague.Application.UI
         void AddView(string viewName, View view);
         void RemoveView(string view);
         View GetView(string viewName);
+        bool TryGetView(string viewName, out View view);
     }
 }

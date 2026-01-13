@@ -7,6 +7,8 @@
         public virtual void SetView(T view)
         {
             View = view;
+            View.OnOpened += OnViewReady;
+            View.OnClosed += OnViewDisabled;
         }
         
         public abstract void OnViewReady();

@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/OtabapaLeague/Scenes/sc_application.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/OtabapaLeague/Scenes/sc_main.unity
+    guid: 1062ca7dfb5efad49a46cf63454b3883
+  - enabled: 1
+    path: Assets/OtabapaLeague/Scenes/sc_ui.unity
+    guid: 3c19ab81223935b49afcf97cccda61f9
   m_configObjects: {}

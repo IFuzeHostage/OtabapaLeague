@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using OtabapaLeague.Application.UI.Elements;
 using UnityEngine;
 
@@ -23,10 +24,23 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
         {
             _tabs.SetButtonAtIndex(index, tabName);
         }
+
+        public override UniTask Open()
+        {
+            _presenter.OnViewReady();
+            return base.Open();
+        }
         
-        private void Awake()
+        public override UniTask Close()
+        {
+            _presenter.OnViewDisabled();
+            return base.Close();
+        }
+
+        protected override void InitComponents()
         {
             _tabs.OnTabChanged += OnTabChanged;
+            base.InitComponents();
         }
 
         private void OnDestroy()

@@ -29,6 +29,11 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
 
         private void LoadView()
         {
+            if (_uiHolder.TryGetView(_viewPath, out var view))
+            {
+                _view = (PlayersWindowView)view;
+                return;
+            }
             var viewPrefab = Resources.Load<PlayersWindowView>(_viewPath);
             _view = GameObject.Instantiate(viewPrefab);
             _uiHolder.AddView(_viewPath, _view);

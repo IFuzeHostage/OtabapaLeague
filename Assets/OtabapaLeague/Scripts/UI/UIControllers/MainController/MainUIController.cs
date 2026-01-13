@@ -9,9 +9,12 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         private readonly IMainMenuEndpoint _mainMenuEndpoint;
         private readonly IPlayersWindowEndpoint _playersWindowEndpoint;
         
-        public MainUIController(IMainMenuEndpoint mainMenuEndpoint)
+        public MainUIController(IMainMenuEndpoint mainMenuEndpoint, IPlayersWindowEndpoint playersWindowEndpoint)
         {
             _mainMenuEndpoint = mainMenuEndpoint;
+            _playersWindowEndpoint = playersWindowEndpoint;
+            
+            _mainMenuEndpoint.SetController(this);
         }
         
         public async UniTask OpenMainMenu()

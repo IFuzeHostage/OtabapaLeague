@@ -13,7 +13,7 @@ namespace OtabapaLeague.Application.UI.Elements
             _rectTransform = GetComponent<RectTransform>();
         }
         
-        private void Awake()
+        protected virtual void Awake()
         {
             InitComponents();
         }
