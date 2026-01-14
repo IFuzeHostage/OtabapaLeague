@@ -1,42 +1,32 @@
 using Cysharp.Threading.Tasks;
+using OtabapaLeague.Scripts.Domain.Systems.Players;
 using UnityEngine;
 
 namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
 {
-    public class PlayersWindowEndpoint : IPlayersWindowEndpoint
+    public class PlayersWindowEndpoint : LoaderEndpoint<PlayersWindowView>, IPlayersWindowEndpoint
     {
-        private const string _viewPath = "p_ui_players";
-
-        private IUIHolder _uiHolder;
-        private PlayersWindowView _view;
+        protected override string ViewPath => "p_ui_players";
         
-        public PlayersWindowEndpoint(IUIHolder uiHolder)
+        private readonly IPlayerManager _playerManager;
+        
+        private IMainUIController _mainUIController;
+        
+        public PlayersWindowEndpoint(IUIHolder uiHolder, IPlayerManager playerManager) : base(uiHolder)
         {
-            _uiHolder = uiHolder;
+            _playerManager = playerManager;
+        }
+
+        //TODO this is ass
+        public void SetController(IMainUIController mainUIController)
+        {
+            _mainUIController = mainUIController;
         }
         
-        public async UniTask Open()
+        protected override void InitView()
         {
-            LoadView();
-            await _view.Open();
-        }
-
-        public async UniTask Close()
-        {
-            await _view.Close();
-            _uiHolder.RemoveView(_viewPath);
-        }
-
-        private void LoadView()
-        {
-            if (_uiHolder.TryGetView(_viewPath, out var view))
-            {
-                _view = (PlayersWindowView)view;
-                return;
-            }
-            var viewPrefab = Resources.Load<PlayersWindowView>(_viewPath);
-            _view = GameObject.Instantiate(viewPrefab);
-            _uiHolder.AddView(_viewPath, _view);
+            var presenter = new PlayersWindowPresenter(_playerManager, _mainUIController);
+            presenter.SetView(View); 
         }
     }
 }

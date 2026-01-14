@@ -8,7 +8,7 @@ namespace OtabapaLeague.Data.Player
         List<Player> AllPlayers { get; }
         
         UniTask Load();
-        UniTask<Player> AddPlayer(string name, string tag);
-        UniTask<Player> GetPlayerByTag(string tag);
+        UniTask AddPlayer(Player player);
+        Player GetPlayerByTag(string tag);
     }
 }

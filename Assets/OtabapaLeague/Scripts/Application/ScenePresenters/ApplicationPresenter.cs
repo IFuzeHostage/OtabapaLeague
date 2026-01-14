@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using OtabapaLeague.Application.SceneLoader;
+using OtabapaLeague.Data.Player;
 using UnityEngine;
 using Zenject;
 
@@ -7,20 +8,27 @@ namespace OtabapaLeague.Application.ScenePresenters
 {
     public class ApplicationPresenter : MonoBehaviour
     {
-        private 
-            ISceneLoader _sceneLoader;
+        private ISceneLoader _sceneLoader;
+        private IPlayersRepository _playersRepository;
         
         [Inject]
-        private void Construct(ISceneLoader sceneLoader)
+        private void Construct(ISceneLoader sceneLoader, IPlayersRepository playersRepository)
         {
             _sceneLoader = sceneLoader;
+            _playersRepository = playersRepository;
         }
 
-        private void Awake()
+        private async void Awake()
         {
-            LoadScenes();
+            await InitCoreSustems();
+            await LoadScenes();
         }
 
+        private async UniTask InitCoreSustems()
+        {
+            await _playersRepository.Load();
+        }
+        
         private async UniTask LoadScenes()
         {
             await _sceneLoader.Init();

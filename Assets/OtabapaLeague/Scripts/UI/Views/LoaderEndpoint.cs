@@ -19,6 +19,7 @@ namespace OtabapaLeague.Application.UI
         public async UniTask Open()
         {
             LoadView();
+            InitView();
             await View.Open();
         }
 
@@ -30,7 +31,7 @@ namespace OtabapaLeague.Application.UI
 
         protected abstract void InitView();
         
-        private void LoadView()
+        protected virtual void LoadView()
         {
             if (_uiHolder.TryGetView(ViewPath, out var view))
             {

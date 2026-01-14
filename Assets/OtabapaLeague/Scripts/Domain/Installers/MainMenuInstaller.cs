@@ -2,6 +2,7 @@ using OtabapaLeague.Application.UI;
 using OtabapaLeague.Application.UI.Screens.MainMenuScreen;
 using OtabapaLeague.Application.UI.Screens.PlayersWindow;
 using OtabapaLeague.Application.UI.UIControllers.MainController;
+using OtabapaLeague.Application.UI.Windows;
 using Zenject;
 
 namespace OtabapaLeague.Domain.Installers
@@ -14,6 +15,7 @@ namespace OtabapaLeague.Domain.Installers
             
             Container.Bind<IMainMenuEndpoint>().To<MainMenuEndpoint>().AsTransient();
             Container.Bind<IPlayersWindowEndpoint>().To<PlayersWindowEndpoint>().AsTransient();
+            Container.Bind<IPlayerEditorEndpoint>().To<PlayerEditorEndpoint>().AsTransient();
         }
     }
 }

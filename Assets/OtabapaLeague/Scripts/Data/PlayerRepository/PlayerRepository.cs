@@ -25,23 +25,21 @@ namespace OtabapaLeague.Data.Player
             await LoadPlayerList();
         }
 
-        public async UniTask<Player> AddPlayer(string name, string tag)
+        public async UniTask AddPlayer(Player player)
         {
-            var newPlayer = new Player(name, tag, 0);
-            _playersByTag.Add(tag, newPlayer);
+            _playersByTag.Add(player.Tag, player);
             
             await SavePlayerList();
-            return newPlayer;
         }
 
-        public async UniTask<Player> GetPlayerByTag(string tag)
+        public Player GetPlayerByTag(string tag)
         {
             if(_playersByTag.TryGetValue(tag, out var player))
             {
                 return player;
             }
-            
-            throw new KeyNotFoundException($"Player with tag {tag} not found.");
+
+            return null;
         }
 
         private async UniTask LoadPlayerList()

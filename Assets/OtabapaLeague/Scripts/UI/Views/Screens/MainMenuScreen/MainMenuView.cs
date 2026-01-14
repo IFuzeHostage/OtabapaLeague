@@ -12,29 +12,9 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
         [SerializeField] 
         private TabGroup _tabs;
 
-        private MainMenuViewPresenter _presenter;
-        
-        public void Init(MainMenuViewPresenter presenter)
-        {
-            _presenter = presenter;
-            _presenter.SetView(this);
-        }
-
         public void SetTabName(int index, string tabName)
         {
             _tabs.SetButtonAtIndex(index, tabName);
-        }
-
-        public override UniTask Open()
-        {
-            _presenter.OnViewReady();
-            return base.Open();
-        }
-        
-        public override UniTask Close()
-        {
-            _presenter.OnViewDisabled();
-            return base.Close();
         }
 
         protected override void InitComponents()

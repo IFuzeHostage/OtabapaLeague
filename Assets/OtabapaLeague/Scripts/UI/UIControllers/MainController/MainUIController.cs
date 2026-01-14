@@ -1,6 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using OtabapaLeague.Application.UI.Screens.MainMenuScreen;
 using OtabapaLeague.Application.UI.Screens.PlayersWindow;
+using OtabapaLeague.Application.UI.Windows;
 
 namespace OtabapaLeague.Application.UI.UIControllers.MainController
 {
@@ -8,13 +10,17 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
     {
         private readonly IMainMenuEndpoint _mainMenuEndpoint;
         private readonly IPlayersWindowEndpoint _playersWindowEndpoint;
+        private readonly IPlayerEditorEndpoint _playerEditorEndpoint;
         
-        public MainUIController(IMainMenuEndpoint mainMenuEndpoint, IPlayersWindowEndpoint playersWindowEndpoint)
+        public MainUIController(IMainMenuEndpoint mainMenuEndpoint, IPlayersWindowEndpoint playersWindowEndpoint,
+            IPlayerEditorEndpoint playerEditorEndpoint)
         {
             _mainMenuEndpoint = mainMenuEndpoint;
             _playersWindowEndpoint = playersWindowEndpoint;
+            _playerEditorEndpoint = playerEditorEndpoint;
             
             _mainMenuEndpoint.SetController(this);
+            _playersWindowEndpoint.SetController(this);
         }
         
         public async UniTask OpenMainMenu()
@@ -35,6 +41,23 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         public async UniTask ClosePlayersWindow()
         {
             await _playersWindowEndpoint.Close();
+        }
+
+        public async UniTask OpenAddPlayerEditor(Action<PlayerEditSubmitEventArgs> addCallback)
+        {
+            var args = new PlayerEditorWindowArgs(string.Empty, addCallback);
+            await _playerEditorEndpoint.Open(args);
+        }
+
+        public async UniTask OpenPlayerEditor(string playerTag, Action<PlayerEditSubmitEventArgs> editCallback)
+        {
+            var args = new PlayerEditorWindowArgs(playerTag, editCallback);
+            await _playerEditorEndpoint.Open(args);
+        }
+
+        public async UniTask ClosePlayerEditor()
+        {
+            await _playerEditorEndpoint.Close();
         }
     }
 }

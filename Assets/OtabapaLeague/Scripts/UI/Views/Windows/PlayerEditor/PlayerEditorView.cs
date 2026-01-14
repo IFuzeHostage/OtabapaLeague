@@ -32,9 +32,9 @@ public class PlayerEditorView : View
         _tagInput.Text = text;
     }
     
-    private void GetTagText()
+    public string GetTagText()
     {
-        _tagInput.Text = _tagInput.Text;
+        return _tagInput.Text;
     }
 
     public void SetCancelButtonText(string text)
