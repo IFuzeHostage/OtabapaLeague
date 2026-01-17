@@ -13,7 +13,7 @@ namespace OtabapaLeague.Application.UI
         UniTask ClosePlayersWindow();
 
         UniTask OpenAddPlayerEditor(Action<PlayerEditSubmitEventArgs> addCallback);
-        UniTask OpenPlayerEditor(string playerTag, Action<PlayerEditSubmitEventArgs> editCallback);
+        UniTask OpenPlayerEditor(int playerId, Action<PlayerEditSubmitEventArgs> editCallback);
         UniTask ClosePlayerEditor();
     }
 }

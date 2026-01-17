@@ -16,7 +16,7 @@ namespace OtabapaLeague.Application.UI.Windows
 
         protected override void InitView(PlayerEditorWindowArgs args)
         {
-            var presenter = new PlayerEditorPresenter(args.Tag, args.EditCallback, _playerManager);
+            var presenter = new PlayerEditorPresenter(args.Id, args.EditCallback, _playerManager);
             presenter.SetView(View);
         }
     }

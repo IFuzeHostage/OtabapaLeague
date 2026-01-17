@@ -4,12 +4,12 @@ namespace OtabapaLeague.Application.UI.Windows
 {
     public class PlayerEditorWindowArgs
     {
-        public readonly string Tag;
+        public readonly int Id;
         public readonly Action<PlayerEditSubmitEventArgs> EditCallback;
         
-        public PlayerEditorWindowArgs(string tag, Action<PlayerEditSubmitEventArgs> editCallback)
+        public PlayerEditorWindowArgs(int id, Action<PlayerEditSubmitEventArgs> editCallback)
         {
-            Tag = tag;
+            Id = id;
             EditCallback = editCallback;
         }
     }

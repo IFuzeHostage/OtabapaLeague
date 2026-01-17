@@ -45,13 +45,13 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
 
         public async UniTask OpenAddPlayerEditor(Action<PlayerEditSubmitEventArgs> addCallback)
         {
-            var args = new PlayerEditorWindowArgs(string.Empty, addCallback);
+            var args = new PlayerEditorWindowArgs(-1, addCallback);
             await _playerEditorEndpoint.Open(args);
         }
 
-        public async UniTask OpenPlayerEditor(string playerTag, Action<PlayerEditSubmitEventArgs> editCallback)
+        public async UniTask OpenPlayerEditor(int playerId, Action<PlayerEditSubmitEventArgs> editCallback)
         {
-            var args = new PlayerEditorWindowArgs(playerTag, editCallback);
+            var args = new PlayerEditorWindowArgs(playerId, editCallback);
             await _playerEditorEndpoint.Open(args);
         }
 

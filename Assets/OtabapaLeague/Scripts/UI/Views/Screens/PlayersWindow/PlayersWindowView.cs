@@ -1,6 +1,7 @@
 using System;
-using OtabapaLeague.Application.UI.Elements;
 using UnityEngine;
+using System.Collections.Generic;
+using OtabapaLeague.Application.UI.Elements;
 
 namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
 {
@@ -15,14 +16,27 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
         [SerializeField]
         private UIButton _addPlayerBuutton;
         
-        public void AddPlayer(string name, string tag, int score)
+        private List<PlayerView> _playerViews = new List<PlayerView>();
+        
+        public PlayerView AddPlayer(string name, string tag, int score)
         {
             var playerView = Instantiate(_playerViewPrefab, _playersParent);
             playerView.SetName(name);
             playerView.SetTag(tag);
             playerView.SetScore(score);
+            
+            _playerViews.Add(playerView);
+            return playerView;
         }
 
+        public void ClearPlayers()
+        {
+            foreach (Transform child in _playersParent)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
         protected override void InitComponents()
         {
             base.InitComponents();

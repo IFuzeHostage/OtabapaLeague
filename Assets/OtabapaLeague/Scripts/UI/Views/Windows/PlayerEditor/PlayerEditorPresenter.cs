@@ -7,13 +7,13 @@ namespace OtabapaLeague.Application.UI.Windows
 {
     public class PlayerEditorPresenter : ViewPresenter<PlayerEditorView>
     {
-        private readonly string _targetTag;
+        private readonly int _targetId;
         private readonly IPlayerManager _playerManager;
         private readonly Action<PlayerEditSubmitEventArgs> _editCallback;
         
-        public PlayerEditorPresenter(string targetTag, Action<PlayerEditSubmitEventArgs> submitCallback, IPlayerManager playerManager)
+        public PlayerEditorPresenter(int targetId, Action<PlayerEditSubmitEventArgs> submitCallback, IPlayerManager playerManager)
         {
-            _targetTag = targetTag;
+            _targetId = targetId;
             _playerManager = playerManager;
             _editCallback = submitCallback;
         }
@@ -21,6 +21,7 @@ namespace OtabapaLeague.Application.UI.Windows
         public override void OnViewReady()
         {
             View.OnSubmitButtonClicked += OnSubmitClicked;
+            View.OnCancelButtonClicked += OnCancelClicked;
             
             if (IsEditingExistingPlayer())
             {
@@ -44,14 +45,19 @@ namespace OtabapaLeague.Application.UI.Windows
             View.Close();
         }
         
+        private void OnCancelClicked()
+        {
+            View.Close();
+        }
+        
         private bool IsEditingExistingPlayer()
         {
-            return !string.IsNullOrEmpty(_targetTag);
+            return _targetId != -1;
         }
 
         private void LoadExistingPlayerEditor()
         {
-            if (_playerManager.TryGetPlayer(_targetTag, out var player))
+            if (_playerManager.TryGetPlayer(_targetId, out var player))
             {
                 View.SetNameText(player.Name);
                 View.SetTagText(player.Tag);
@@ -65,6 +71,8 @@ namespace OtabapaLeague.Application.UI.Windows
         
         private void LoadNewPlayerEditor()
         {
+            View.SetNameText(string.Empty);
+            View.SetTagText(string.Empty);
             View.SetSubmitButtonText("Create");
         }
         
