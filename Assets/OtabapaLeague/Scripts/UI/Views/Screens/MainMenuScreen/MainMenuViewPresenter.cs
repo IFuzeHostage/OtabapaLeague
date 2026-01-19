@@ -28,11 +28,13 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
         
         private void OnViewTabChanged(int index)
         {
+            CloseAllWindows();
+            
             var tab = (MainMenuTabs)index;
             switch (tab)
             {
                 case MainMenuTabs.Games:
-                    Debug.Log("Open Games Tab");
+                    _mainUIController.OpenGameWindow();
                     break;
                 case MainMenuTabs.Players:
                     _mainUIController.OpenPlayersWindow();
@@ -41,6 +43,12 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
                     Debug.Log("Open Rating Tab");
                     break;
             }
+        }
+        
+        private void CloseAllWindows()
+        {
+            _mainUIController.CloseGameWindow();
+            _mainUIController.ClosePlayersWindow();
         }
     }
 }

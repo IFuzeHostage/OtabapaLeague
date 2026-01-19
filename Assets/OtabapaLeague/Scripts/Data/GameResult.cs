@@ -4,5 +4,6 @@ namespace OtabapaLeague.Scripts.Data
     {
         FirstPlayerWin,
         SecondPlayerWin,
+        Draw
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using OtabapaLeague.Scripts.Domain.Systems.Players;
 using Zenject;
-using Player = OtabapaLeague.Data.Player.Player;
 
 namespace OtabapaLeague.Application.UI.Windows
 {

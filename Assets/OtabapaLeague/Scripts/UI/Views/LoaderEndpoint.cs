@@ -25,6 +25,9 @@ namespace OtabapaLeague.Application.UI
 
         public async UniTask Close()
         {
+            if(View == null)
+                return;
+            
             await View.Close();
             _uiHolder.RemoveView(ViewPath);
         }

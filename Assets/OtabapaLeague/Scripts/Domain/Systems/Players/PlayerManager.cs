@@ -6,11 +6,11 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Players
 {
     public class PlayerManager : IPlayerManager
     {
-        public event Action<Player> OnPlayerAdded;
-        public event Action<Player> OnPlayerUpdated;
-        public event Action<Player> OnPlayerRemoved;
+        public event Action<PlayerModel> OnPlayerAdded;
+        public event Action<PlayerModel> OnPlayerUpdated;
+        public event Action<PlayerModel> OnPlayerRemoved;
         
-        public IEnumerable<Player> AllPlayers => _playersRepository.AllPlayers;
+        public IEnumerable<PlayerModel> AllPlayers => _playersRepository.AllPlayers;
         private IPlayersRepository _playersRepository;
         
         public PlayerManager(IPlayersRepository playersRepository)
@@ -24,10 +24,15 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Players
             OnPlayerAdded?.Invoke(newPlayer);
         }
 
-        public void UpdatePlayer(Player player)
+        public void UpdatePlayer(PlayerModel playerModel)
         {
-            _playersRepository.UpdatePlayer(player);
-            OnPlayerUpdated?.Invoke(player);
+            _playersRepository.UpdatePlayer(playerModel);
+            OnPlayerUpdated?.Invoke(playerModel);
+        }
+
+        public PlayerModel GetPlayer(int id)
+        {
+            return _playersRepository.GetPlayerById(id);
         }
 
         public void RemovePlayer(int targetId)
@@ -42,11 +47,11 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Players
             }
         }
         
-        public bool TryGetPlayer(int targetId, out Player player)
+        public bool TryGetPlayer(int targetId, out PlayerModel playerModel)
         {
-            player = _playersRepository.GetPlayerById(targetId);
+            playerModel = _playersRepository.GetPlayerById(targetId);
             
-            return player != null;
+            return playerModel != null;
         }
     }
 }

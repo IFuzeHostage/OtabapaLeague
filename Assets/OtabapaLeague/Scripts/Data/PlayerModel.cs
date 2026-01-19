@@ -1,6 +1,6 @@
 namespace OtabapaLeague.Data.Player
 {
-    public class Player
+    public class PlayerModel
     {
         public int Id => _id;
         public string Name => _name;
@@ -12,7 +12,7 @@ namespace OtabapaLeague.Data.Player
         private string _tag;
         private int _score;
         
-        public Player(int id, string name, string tag, int score)
+        public PlayerModel(int id, string name, string tag, int score)
         {
             _id = id;
             _tag = tag;

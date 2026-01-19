@@ -1,8 +1,10 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using OtabapaLeague.Application.UI.Screens.Games;
 using OtabapaLeague.Application.UI.Screens.MainMenuScreen;
 using OtabapaLeague.Application.UI.Screens.PlayersWindow;
 using OtabapaLeague.Application.UI.Windows;
+using OtabapaLeague.Application.UI.Windows.GameEditor;
 
 namespace OtabapaLeague.Application.UI.UIControllers.MainController
 {
@@ -11,16 +13,22 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         private readonly IMainMenuEndpoint _mainMenuEndpoint;
         private readonly IPlayersWindowEndpoint _playersWindowEndpoint;
         private readonly IPlayerEditorEndpoint _playerEditorEndpoint;
+        private readonly IGameWindowEndpoint _gameWindowEndpoint;
+        private readonly IGameEditorEndpoint _gameEditorEndpoint;
         
         public MainUIController(IMainMenuEndpoint mainMenuEndpoint, IPlayersWindowEndpoint playersWindowEndpoint,
-            IPlayerEditorEndpoint playerEditorEndpoint)
+            IPlayerEditorEndpoint playerEditorEndpoint, IGameWindowEndpoint gameWindowEndpoint,
+            IGameEditorEndpoint gameEditorEndpoint)
         {
             _mainMenuEndpoint = mainMenuEndpoint;
             _playersWindowEndpoint = playersWindowEndpoint;
             _playerEditorEndpoint = playerEditorEndpoint;
+            _gameWindowEndpoint = gameWindowEndpoint;
+            _gameEditorEndpoint = gameEditorEndpoint;
             
             _mainMenuEndpoint.SetController(this);
             _playersWindowEndpoint.SetController(this);
+            _gameWindowEndpoint.SetController(this);
         }
         
         public async UniTask OpenMainMenu()
@@ -58,6 +66,26 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         public async UniTask ClosePlayerEditor()
         {
             await _playerEditorEndpoint.Close();
+        }
+
+        public async UniTask OpenGameWindow()
+        {
+            await _gameWindowEndpoint.Open();
+        }
+        
+        public async UniTask CloseGameWindow()
+        {
+            await _gameWindowEndpoint.Close();
+        }
+        
+        public async UniTask OpenGameEditor(Action<GameEditorSubmitArgs> onSubmit)
+        {
+            await _gameEditorEndpoint.Open(new GameEditorWindowArgs(onSubmit));
+        }
+
+        public async UniTask CloseGameEditor()
+        {
+            await _gameEditorEndpoint.Close();
         }
     }
 }

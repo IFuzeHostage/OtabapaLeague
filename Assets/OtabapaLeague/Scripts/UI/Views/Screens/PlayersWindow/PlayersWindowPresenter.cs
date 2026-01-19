@@ -9,7 +9,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
         private readonly IPlayerManager _playerManager;
         private readonly IMainUIController _mainUIController;
         
-        private Player _editedPlayer = null;
+        private PlayerModel _editedPlayerModel = null;
         
         public PlayersWindowPresenter(IPlayerManager playerManager, IMainUIController mainUIController)
         {
@@ -55,7 +55,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
 
         private void OnEditPlayerSubmit(PlayerEditSubmitEventArgs onSubmitArgs)
         {
-            if (_playerManager.TryGetPlayer(_editedPlayer.Id, out var player))
+            if (_playerManager.TryGetPlayer(_editedPlayerModel.Id, out var player))
             {
                 player.UpdateName(onSubmitArgs.Name);
                 player.UpdateTag(onSubmitArgs.Tag);
@@ -65,30 +65,30 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
             }
         }
         
-        private void OnPlayerAdded(Player player)
+        private void OnPlayerAdded(PlayerModel playerModel)
         {
             DrawPlayerList();
         }
 
-        private void OnUpdatePlayer(Player player)
+        private void OnUpdatePlayer(PlayerModel playerModel)
         {
             DrawPlayerList();
         }
         
-        private void OnPlayerRemoved(Player player)
+        private void OnPlayerRemoved(PlayerModel playerModel)
         {
             DrawPlayerList();
         }
         
-        private void ProcessEditPlayer(Player player)
+        private void ProcessEditPlayer(PlayerModel playerModel)
         {
-            _editedPlayer = player;
-            _mainUIController.OpenPlayerEditor(player.Id, OnEditPlayerSubmit);
+            _editedPlayerModel = playerModel;
+            _mainUIController.OpenPlayerEditor(playerModel.Id, OnEditPlayerSubmit);
         }
 
-        private void ProcessDeletePlayer(Player player)
+        private void ProcessDeletePlayer(PlayerModel playerModel)
         {
-            _playerManager.RemovePlayer(player.Id);
+            _playerManager.RemovePlayer(playerModel.Id);
         }
     }
 }

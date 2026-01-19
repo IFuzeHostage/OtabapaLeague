@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace OtabapaLeague.Data.Player
 {
-    public class PlayerRepository : IPlayersRepository
+    public class LocalPlayerRepository : IPlayersRepository
     {
-        public List<Player> AllPlayers => _playersById.Values.ToList();
+        public List<PlayerModel> AllPlayers => _playersById.Values.ToList();
      
         private const string PLAYER_DATA_KEY = "PlayersData";
         private readonly IDataSaver _dataSaver;
         
-        private Dictionary<int, Player> _playersById;
+        private Dictionary<int, PlayerModel> _playersById;
         
-        public PlayerRepository(IDataSaver dataSaver)
+        public LocalPlayerRepository(IDataSaver dataSaver)
         {
             _dataSaver = dataSaver;
-            _playersById = new Dictionary<int, Player>();
+            _playersById = new Dictionary<int, PlayerModel>();
         }
 
         public async UniTask Load()
@@ -26,7 +26,7 @@ namespace OtabapaLeague.Data.Player
             await LoadPlayerList();
         }
 
-        public async UniTask<Player> AddPlayer(string name, string tag, int score)
+        public async UniTask<PlayerModel> AddPlayer(string name, string tag, int score)
         {
             if(_playersById.Values.Any(player => player.Tag == tag))
             {
@@ -35,14 +35,14 @@ namespace OtabapaLeague.Data.Player
             }
 
             int newPlayerId = GetNextId();
-            var player = new Player(newPlayerId, name, tag, score);
+            var player = new PlayerModel(newPlayerId, name, tag, score);
             _playersById.Add(newPlayerId, player);
             
             await SavePlayerList();
             return player;
         }
 
-        public async UniTask UpdatePlayer(Player player)
+        public async UniTask UpdatePlayer(PlayerModel playerModel)
         {
             await SavePlayerList();
         }
@@ -57,7 +57,7 @@ namespace OtabapaLeague.Data.Player
             Debug.LogError("No player with such tag to remove: " + playerId);
         }
 
-        public Player GetPlayerById(int id)
+        public PlayerModel GetPlayerById(int id)
         {
             if(_playersById.TryGetValue(id, out var player))
             {
@@ -69,14 +69,14 @@ namespace OtabapaLeague.Data.Player
 
         private async UniTask LoadPlayerList()
         {
-            var playerList = await _dataSaver.LoadData<List<Player>>(PLAYER_DATA_KEY);
+            var playerList = await _dataSaver.LoadData<List<PlayerModel>>(PLAYER_DATA_KEY);
             if (playerList != null)
             {
                 _playersById = playerList.ToDictionary(player => player.Id, player => player);
             }
             else
             {
-                _playersById = new Dictionary<int, Player>();
+                _playersById = new Dictionary<int, PlayerModel>();
             }
         }
         

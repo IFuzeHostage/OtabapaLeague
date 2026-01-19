@@ -5,12 +5,12 @@ namespace OtabapaLeague.Data.Player
 {
     public interface IPlayersRepository
     {
-        List<Player> AllPlayers { get; }
+        List<PlayerModel> AllPlayers { get; }
         
         UniTask Load();
-        UniTask<Player> AddPlayer(string name, string tag, int score);
-        UniTask UpdatePlayer(Player player);
+        UniTask<PlayerModel> AddPlayer(string name, string tag, int score);
+        UniTask UpdatePlayer(PlayerModel playerModel);
         UniTask RemovePlayer(int playerId);
-        Player GetPlayerById(int id);
+        PlayerModel GetPlayerById(int id);
     }
 }

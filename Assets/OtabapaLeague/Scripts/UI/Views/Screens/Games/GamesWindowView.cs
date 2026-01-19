@@ -19,6 +19,15 @@ namespace OtabapaLeague.Application.UI.Screens.Games
 
         private List<GameView> _games = new List<GameView>();
         
+        public void ClearGames()
+        {
+            foreach (var gameView in _games)
+            {
+                Destroy(gameView.gameObject);
+            }
+            _games.Clear();
+        }
+        
         public GameView AddGame(GameResultsPlayerData playerOneData, GameResultsPlayerData playerTwoData,
             GameResult result)
         {
