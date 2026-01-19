@@ -5,19 +5,19 @@ namespace OtabapaLeague.Data.Player
         public int Id => _id;
         public string Name => _name;
         public string Tag => _tag;
-        public int Score => _score;
+        public int Rating => _rating;
 
         private int _id;
         private string _name;
         private string _tag;
-        private int _score;
+        private int _rating;
         
-        public PlayerModel(int id, string name, string tag, int score)
+        public PlayerModel(int id, string name, string tag, int rating)
         {
             _id = id;
             _tag = tag;
             _name = name;
-            _score = score;
+            _rating = rating;
         }
         
         public void UpdateName(string newName)
@@ -30,9 +30,9 @@ namespace OtabapaLeague.Data.Player
             _tag = newTag;
         }
         
-        public void UpdateScore(int newScore)
+        public void UpdateRating(int newScore)
         {
-            _score = newScore;
+            _rating = newScore;
         }
     }
 }

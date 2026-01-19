@@ -30,7 +30,7 @@ namespace OtabapaLeague.Scripts.Data.GamesRepository
             GameResult result, int ratingShift)
         {
             int newGameId = GetNextId();
-            var player = new GameModel(newGameId, firstPlayerId, secondPlayerId, firstPlayerScore, secondPlayerScore,
+            var player = new GameModel(newGameId, firstPlayerId, firstPlayerScore, secondPlayerId, secondPlayerScore,
                 result, ratingShift);
             
             _gamesById.Add(newGameId, player);

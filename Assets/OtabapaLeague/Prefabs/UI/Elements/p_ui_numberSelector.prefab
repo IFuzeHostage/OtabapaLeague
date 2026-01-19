@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _numberText: {fileID: 9160760213817899834}
-  _increaseButton: {fileID: 250330167916392384}
-  _decreaseButton: {fileID: 1114841897196274303}
+  _increaseButton: {fileID: 1114841897196274303}
+  _decreaseButton: {fileID: 250330167916392384}
 --- !u!1 &8440869308030592235
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,9 +300,21 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u200B"
       objectReference: {fileID: 0}
+    - target: {fileID: 1649241878875125698, guid: ded6323b2925150449136bfe24f59848, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5834529505980453566, guid: ded6323b2925150449136bfe24f59848, type: 3}
       propertyPath: m_text
-      value: 
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834529505980453566, guid: ded6323b2925150449136bfe24f59848, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834529505980453566, guid: ded6323b2925150449136bfe24f59848, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -415,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193242685785764034, guid: f3240984bbc967e4f8f764c625b8b575, type: 3}
       propertyPath: m_Name
-      value: p_ui_button (1)
+      value: p_ui_up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -531,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193242685785764034, guid: f3240984bbc967e4f8f764c625b8b575, type: 3}
       propertyPath: m_Name
-      value: p_ui_button
+      value: p_ui_down
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

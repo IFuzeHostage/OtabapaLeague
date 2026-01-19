@@ -1,20 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using OtabapaLeague.Data.Player;
 using OtabapaLeague.Scripts.Data;
 using OtabapaLeague.Scripts.Data.GamesRepository;
+using OtabapaLeague.Scripts.Domain.Systems.Players;
 
 namespace OtabapaLeague.Scripts.Domain.Systems.Games
 {
     public class GameManager : IGamesManager
     {
+        public event Action<GameModel> OnGameRegisteredEvent;
         public List<GameModel> AllGames => _gamesRepository.AllGames;
 
         private IGamesRepository _gamesRepository;
+        private IPlayerManager _playerManager;
         
-        public GameManager(IGamesRepository gamesRepository)
+        public GameManager(IGamesRepository gamesRepository, IPlayerManager playerManager)
         {
             _gamesRepository = gamesRepository;
+            _playerManager = playerManager;
         }
         
         public void RegisterGame(PlayerModel firstPlayerModel, PlayerModel secondPlayerModel, 
@@ -28,10 +33,11 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Games
             else
                 result = GameResult.Draw;
 
-            int ratingShift = 20; 
+            int ratingShift = 20;
 
-            _gamesRepository.SaveGame(firstPlayerModel.Id, secondPlayerModel.Id, 
-                firstPlayerScore, secondPlayerScore, result, ratingShift);
+            ShiftPlayerRating(firstPlayerModel, secondPlayerModel, result, ratingShift).Forget();
+            RequestGameRegistration(firstPlayerModel.Id, firstPlayerScore, secondPlayerModel.Id, secondPlayerScore, 
+                result, ratingShift).Forget();
         }
 
         public void RemoveGame(int gameId)
@@ -41,6 +47,30 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Games
             {
                 _gamesRepository.DeleteGame(gameModel);
             }
+        }
+
+        private async UniTask RequestGameRegistration(int firstId, int firstScore, int secondId, int secondScore, GameResult result,
+            int ratingShift)
+        {
+            var gameModel = await _gamesRepository.SaveGame(firstId, secondId, 
+                firstScore, secondScore, result, ratingShift);
+            
+            OnGameRegisteredEvent?.Invoke(gameModel);
+        }
+
+        private UniTask ShiftPlayerRating(PlayerModel firstPlayer, PlayerModel secondPlayer, 
+            GameResult result, int ratingShift)
+        {
+            var firstPlayerRating = firstPlayer.Rating + ratingShift * (result == GameResult.FirstPlayerWin ? 1 : -1);
+            var secondPlayerRating = secondPlayer.Rating + ratingShift * (result == GameResult.SecondPlayerWin ? 1 : -1);
+            
+            firstPlayer.UpdateRating(firstPlayerRating);
+            secondPlayer.UpdateRating(secondPlayerRating);
+            
+            _playerManager.UpdatePlayer(firstPlayer);
+            _playerManager.UpdatePlayer(secondPlayer);
+            
+            return UniTask.CompletedTask;
         }
     }
 }

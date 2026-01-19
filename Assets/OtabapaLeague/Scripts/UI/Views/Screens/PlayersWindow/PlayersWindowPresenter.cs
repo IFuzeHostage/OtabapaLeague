@@ -37,7 +37,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
             View.ClearPlayers();
             foreach (var player in _playerManager.AllPlayers)
             {
-                var playerView = View.AddPlayer(player.Name, player.Tag, player.Score);
+                var playerView = View.AddPlayer(player.Name, player.Tag, player.Rating);
                 playerView.OnEditButton += () => ProcessEditPlayer(player);
                 playerView.OnDeleteButton += () => ProcessDeletePlayer(player);
             }
@@ -59,7 +59,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
             {
                 player.UpdateName(onSubmitArgs.Name);
                 player.UpdateTag(onSubmitArgs.Tag);
-                player.UpdateScore(onSubmitArgs.Score);
+                player.UpdateRating(onSubmitArgs.Score);
                 
                 _playerManager.UpdatePlayer(player);
             }

@@ -24,11 +24,13 @@ namespace OtabapaLeague.Application.UI.Screens.Games
         {
             LoadGames();
             View.OnAddGameButtonClickedEvent += OnAddGameButtonClicked;
+            _gamesManager.OnGameRegisteredEvent += OnGameRegistered;
         }
 
         public override void OnViewDisabled()
         {
-            
+            View.OnAddGameButtonClickedEvent -= OnAddGameButtonClicked;
+            _gamesManager.OnGameRegisteredEvent -= OnGameRegistered;
         }
 
         private void LoadGames()
@@ -59,6 +61,11 @@ namespace OtabapaLeague.Application.UI.Screens.Games
             var firstPlayer = _playerManager.GetPlayer(args.FirstPlayerId);
             var secondPlayer = _playerManager.GetPlayer(args.SecondPlayerId);
             _gamesManager.RegisterGame(firstPlayer, secondPlayer, args.FirstPlayerScore, args.SecondPlayerScore);
+        }
+
+        private void OnGameRegistered(GameModel gameModel)
+        {
+            LoadGames();
         }
         
         private GameResultsPlayerData GetPlayerData(int playerId, int gameScore)
