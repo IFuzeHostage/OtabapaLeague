@@ -7,6 +7,7 @@ public class PlayerEditorView : View
 {
     public event Action OnCancelButtonClicked;
     public event Action OnSubmitButtonClicked;
+    public event Action OnAvatarButtonClicked;
     
     [SerializeField]
     private UITextInput _nameInput;
@@ -16,6 +17,8 @@ public class PlayerEditorView : View
     private TextButton _cancelButton;
     [SerializeField]
     private TextButton _submitButton;
+    [SerializeField]
+    private ImageButton _imageButton;
     
     public void SetNameText(string text)
     {
@@ -46,11 +49,18 @@ public class PlayerEditorView : View
     {
         _submitButton.SetText(text);
     }
+
+    public void SetAvatar(Sprite sprite)
+    {
+        _imageButton.SetImage(sprite);
+    }
     
     protected override void InitComponents()
     {
         _cancelButton.OnClick += HandleCancelButtonClicked;
         _submitButton.OnClick += HandleSubmitButtonClicked;
+        _imageButton.OnClick += HandleImageButtonClicked;
+        
         base.InitComponents();
     }
 
@@ -62,5 +72,10 @@ public class PlayerEditorView : View
     private void HandleCancelButtonClicked()
     {
         OnCancelButtonClicked?.Invoke();
+    }
+    
+    private void HandleImageButtonClicked()
+    {
+        OnAvatarButtonClicked?.Invoke();
     }
 }

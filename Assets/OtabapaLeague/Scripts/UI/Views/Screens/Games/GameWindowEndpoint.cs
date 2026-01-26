@@ -12,6 +12,8 @@ namespace OtabapaLeague.Application.UI.Screens.Games
         private IGamesManager _gamesManager;
         private IPlayerManager _playerManager;
         
+        private GameWindowPresenter _presenter;
+        
         public GameWindowEndpoint(IUIHolder uiHolder, IGamesManager gamesManager, IPlayerManager playerManager) : base(uiHolder)
         {
             _gamesManager = gamesManager;
@@ -20,13 +22,18 @@ namespace OtabapaLeague.Application.UI.Screens.Games
 
         protected override void InitView()
         {
-            var presenter = new GameWindowPresenter(_gamesManager, _playerManager, _mainUIController);
-            presenter.SetView(View);
+            _presenter = new GameWindowPresenter(_gamesManager, _playerManager, _mainUIController);
+            _presenter.SetView(View);
         }
 
         public void SetController(IMainUIController controller)
         {
             _mainUIController = controller;
+        }
+        
+        protected override void DisposeView()
+        {
+            _presenter.DetachView();
         }
     }
 }

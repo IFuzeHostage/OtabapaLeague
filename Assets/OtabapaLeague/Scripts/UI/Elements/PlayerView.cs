@@ -18,7 +18,14 @@ namespace OtabapaLeague.Application.UI.Elements
         private UIButton _editButton;
         [SerializeField]
         private UIButton _deleteButton;
+        [SerializeField]
+        private UIImage _avatarImage;
 
+        public void SetAvatar(Sprite avatar)
+        {
+            _avatarImage.SetImage(avatar);
+        }
+        
         public void SetName(string name)
         {
             _nameText.Text = name;

@@ -29,8 +29,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2271765880653120484}
   - {fileID: 8270345803048373090}
+  - {fileID: 2271765880653120484}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f59ffd4839429486569e43be1642c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameText: {fileID: 5211581354191056245}
-  _tagText: {fileID: 2671625348795508211}
+  _nameText: {fileID: 2671625348795508211}
+  _tagText: {fileID: 5211581354191056245}
 --- !u!1001 &1290878404641608041
 PrefabInstance:
   m_ObjectHideFlags: 0

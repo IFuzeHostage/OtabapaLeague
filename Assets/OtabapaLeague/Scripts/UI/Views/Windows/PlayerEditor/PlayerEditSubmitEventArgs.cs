@@ -1,16 +1,18 @@
-﻿namespace OtabapaLeague.Application.UI.Windows
+﻿using UnityEngine;
+
+namespace OtabapaLeague.Application.UI.Windows
 {
     public class PlayerEditSubmitEventArgs
     {
         public readonly string Name;
         public readonly string Tag;
-        public readonly int Score;
+        public readonly Sprite Avatar;
         
-        public PlayerEditSubmitEventArgs(string name, string tag, int score)
+        public PlayerEditSubmitEventArgs(string name, string tag, Sprite avatar)
         {
             Name = name;
             Tag = tag;
-            Score = score;
+            Avatar = avatar;
         }
     }
 }

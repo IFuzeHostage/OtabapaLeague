@@ -4,7 +4,8 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Files
 {
     public interface IFileSystem
     {
-        Texture2D SelectImage();
-        
+        Sprite SelectImage();
+        void SaveImage(Sprite texture, string key);
+        Sprite LoadSprite(string key);
     }
 }

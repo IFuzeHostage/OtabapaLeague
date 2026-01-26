@@ -6,7 +6,7 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Files
 {
     public class FileSystem : IFileSystem
     {
-        public Texture2D SelectImage()
+        public Sprite SelectImage()
         {
             var paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false);
             if (paths.Length > 0)
@@ -14,15 +14,16 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Files
                 var selectedPath = paths[0];
                 
                 Texture2D tex = new Texture2D(2, 2);
-                ImageConversion.LoadImage(tex, System.IO.File.ReadAllBytes(selectedPath));
-                return tex;
+                ImageConversion.LoadImage(tex, File.ReadAllBytes(selectedPath));
+                return ConvertToSprite(tex);
             }
             
             return null;
         }
 
-        public void SaveImage(Texture2D texture, string key)
+        public void SaveImage(Sprite sprite, string key)
         {
+            var texture = sprite.texture;
             byte[] bytes = texture.EncodeToPNG();
 
             string path = Path.Combine(UnityEngine.Application.persistentDataPath, key);
@@ -47,6 +48,13 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Files
             texture.LoadImage(bytes); // auto-resizes texture
 
             return texture;
+        }
+
+        public Sprite LoadSprite(string key)
+        {
+            var texture = LoadImage(key);
+
+            return ConvertToSprite(texture);
         }
 
         private Sprite ConvertToSprite(Texture2D texture)

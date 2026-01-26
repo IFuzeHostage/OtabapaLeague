@@ -1,4 +1,5 @@
-﻿using OtabapaLeague.Scripts.Domain.Systems.Players;
+﻿using OtabapaLeague.Scripts.Data.AvatarsRepository;
+using OtabapaLeague.Scripts.Domain.Systems.Players;
 
 namespace OtabapaLeague.Application.UI.Screens.RatingWindow
 {
@@ -7,16 +8,26 @@ namespace OtabapaLeague.Application.UI.Screens.RatingWindow
         protected override string ViewPath => "p_ui_rating";
         
         private readonly IPlayerManager _playerManager;
+        private readonly IPlayerAvatarsRepository _playerAvatarsRepository;
 
-        public RatingScreenEndpoint(IUIHolder uiHolder, IPlayerManager playerManager) : base(uiHolder)
+        protected RatingScreenPresenter _presenter;
+        
+        public RatingScreenEndpoint(IUIHolder uiHolder, IPlayerManager playerManager, 
+            IPlayerAvatarsRepository playerAvatarsRepository) : base(uiHolder)
         {
             _playerManager = playerManager;
+            _playerAvatarsRepository = playerAvatarsRepository;
         }
 
         protected override void InitView()
         {
-            var presenter = new RatingScreenPresenter(_playerManager);
-            presenter.SetView(View);
+            _presenter = new RatingScreenPresenter(_playerManager, _playerAvatarsRepository);
+            _presenter.SetView(View);
+        }
+        
+        protected override void DisposeView()
+        {
+            _presenter.DetachView();
         }
     }
 }

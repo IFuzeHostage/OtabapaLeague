@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using OtabapaLeague.Application.UI.Screens.Games;
 using OtabapaLeague.Application.UI.Screens.MainMenuScreen;
 using OtabapaLeague.Application.UI.Screens.PlayersWindow;
+using OtabapaLeague.Application.UI.Screens.RatingWindow;
 using OtabapaLeague.Application.UI.Windows;
 using OtabapaLeague.Application.UI.Windows.GameEditor;
 
@@ -15,16 +16,18 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         private readonly IPlayerEditorEndpoint _playerEditorEndpoint;
         private readonly IGameWindowEndpoint _gameWindowEndpoint;
         private readonly IGameEditorEndpoint _gameEditorEndpoint;
+        private readonly IRatingScreenEndpoint _ratingScreenEndpoint;
         
         public MainUIController(IMainMenuEndpoint mainMenuEndpoint, IPlayersWindowEndpoint playersWindowEndpoint,
             IPlayerEditorEndpoint playerEditorEndpoint, IGameWindowEndpoint gameWindowEndpoint,
-            IGameEditorEndpoint gameEditorEndpoint)
+            IGameEditorEndpoint gameEditorEndpoint, IRatingScreenEndpoint ratingScreenEndpoint)
         {
             _mainMenuEndpoint = mainMenuEndpoint;
             _playersWindowEndpoint = playersWindowEndpoint;
             _playerEditorEndpoint = playerEditorEndpoint;
             _gameWindowEndpoint = gameWindowEndpoint;
             _gameEditorEndpoint = gameEditorEndpoint;
+            _ratingScreenEndpoint = ratingScreenEndpoint;
             
             _mainMenuEndpoint.SetController(this);
             _playersWindowEndpoint.SetController(this);
@@ -86,6 +89,16 @@ namespace OtabapaLeague.Application.UI.UIControllers.MainController
         public async UniTask CloseGameEditor()
         {
             await _gameEditorEndpoint.Close();
+        }
+
+        public async UniTask OpenRatingScreen()
+        {
+            await _ratingScreenEndpoint.Open();
+        }
+
+        public async UniTask CloseRatingScreen()
+        {
+            await _ratingScreenEndpoint.Close();
         }
     }
 }

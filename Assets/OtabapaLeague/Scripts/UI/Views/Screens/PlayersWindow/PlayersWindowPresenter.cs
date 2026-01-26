@@ -1,5 +1,6 @@
 using OtabapaLeague.Application.UI.Windows;
 using OtabapaLeague.Data.Player;
+using OtabapaLeague.Scripts.Data.AvatarsRepository;
 using OtabapaLeague.Scripts.Domain.Systems.Players;
 
 namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
@@ -7,14 +8,17 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
     public class PlayersWindowPresenter : ViewPresenter<PlayersWindowView>
     {
         private readonly IPlayerManager _playerManager;
+        private readonly IPlayerAvatarsRepository _playerAvatarsRepository;
         private readonly IMainUIController _mainUIController;
         
         private PlayerModel _editedPlayerModel = null;
         
-        public PlayersWindowPresenter(IPlayerManager playerManager, IMainUIController mainUIController)
+        public PlayersWindowPresenter(IPlayerManager playerManager, IPlayerAvatarsRepository playerAvatarRepository, 
+            IMainUIController mainUIController)
         {
             _playerManager = playerManager;
             _mainUIController = mainUIController;
+            _playerAvatarsRepository = playerAvatarRepository;
         }
         
         public override void OnViewReady()
@@ -29,7 +33,10 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
 
         public override void OnViewDisabled()
         {
-            
+            _playerManager.OnPlayerAdded -= OnPlayerAdded;
+            _playerManager.OnPlayerRemoved -= OnPlayerRemoved;
+            _playerManager.OnPlayerUpdated -= OnUpdatePlayer;
+            View.OnAddPlayerClicked -= OnAddPlayerClicked;
         }
 
         private void DrawPlayerList()
@@ -37,7 +44,8 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
             View.ClearPlayers();
             foreach (var player in _playerManager.AllPlayers)
             {
-                var playerView = View.AddPlayer(player.Name, player.Tag, player.Rating);
+                var avatar = _playerAvatarsRepository.GetAvatar(player.Id);
+                var playerView = View.AddPlayer(player.Name, player.Tag, player.Rating, avatar);
                 playerView.OnEditButton += () => ProcessEditPlayer(player);
                 playerView.OnDeleteButton += () => ProcessDeletePlayer(player);
             }
@@ -50,7 +58,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
         
         private void OnAddPlayerSubmit(PlayerEditSubmitEventArgs onSubmitArgs)
         {
-            _playerManager.AddNewPlayer(onSubmitArgs.Name, onSubmitArgs.Tag);
+            _playerManager.AddNewPlayer(onSubmitArgs.Name, onSubmitArgs.Tag, onSubmitArgs.Avatar);
         }
 
         private void OnEditPlayerSubmit(PlayerEditSubmitEventArgs onSubmitArgs)
@@ -59,7 +67,7 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
             {
                 player.UpdateName(onSubmitArgs.Name);
                 player.UpdateTag(onSubmitArgs.Tag);
-                player.UpdateRating(onSubmitArgs.Score);
+                _playerAvatarsRepository.SaveAvatar(_editedPlayerModel.Id, onSubmitArgs.Avatar);
                 
                 _playerManager.UpdatePlayer(player);
             }

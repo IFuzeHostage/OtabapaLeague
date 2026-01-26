@@ -18,12 +18,13 @@ namespace OtabapaLeague.Application.UI.Screens.PlayersWindow
         
         private List<PlayerView> _playerViews = new List<PlayerView>();
         
-        public PlayerView AddPlayer(string name, string tag, int score)
+        public PlayerView AddPlayer(string name, string tag, int score, Sprite avatar)
         {
             var playerView = Instantiate(_playerViewPrefab, _playersParent);
             playerView.SetName(name);
             playerView.SetTag(tag);
             playerView.SetScore(score);
+            playerView.SetAvatar(avatar);
             
             _playerViews.Add(playerView);
             return playerView;

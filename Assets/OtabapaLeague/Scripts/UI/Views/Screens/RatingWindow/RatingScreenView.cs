@@ -13,13 +13,14 @@ namespace OtabapaLeague.Application.UI.Screens.RatingWindow
         
         private Dictionary<int, PlacedPlayerView> _playersByPlace = new Dictionary<int, PlacedPlayerView>();
         
-        public PlacedPlayerView AddPlayer(string name, string tag, int place, int rating)
+        public PlacedPlayerView AddPlayer(string name, string tag, int place, int rating, Sprite avatar)
         {
             var playerView = Instantiate(_playerViewPrefab, __playerParent);
             playerView.SetPlayer(name, tag);
             playerView.SetPlace(place);
             playerView.SetScore(rating);
-            return Instantiate(_playerViewPrefab, __playerParent);
+            playerView.SetAvatar(avatar);
+            return playerView;
         }
         
         public void ClearPlayers()

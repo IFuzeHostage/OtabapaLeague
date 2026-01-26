@@ -10,6 +10,8 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
         
         private IMainUIController _mainUIController;
         
+        protected MainMenuViewPresenter _presenter;
+        
         public MainMenuEndpoint(IUIHolder uiHolder) : base(uiHolder)
         {
         }
@@ -22,8 +24,13 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
 
         protected override void InitView()
         {
-            var presenter = new MainMenuViewPresenter(_mainUIController);
-            presenter.SetView(View);
+            _presenter = new MainMenuViewPresenter(_mainUIController);
+            _presenter.SetView(View);
+        }
+
+        protected override void DisposeView()
+        {
+            _presenter.DetachView();
         }
     }
 }

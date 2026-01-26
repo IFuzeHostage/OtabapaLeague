@@ -1,5 +1,7 @@
 ﻿using System;
+using OtabapaLeague.Scripts.Data.AvatarsRepository;
 using OtabapaLeague.Scripts.Domain.Systems.Players;
+using UnityEngine;
 using Zenject;
 
 namespace OtabapaLeague.Application.UI.Windows
@@ -7,13 +9,19 @@ namespace OtabapaLeague.Application.UI.Windows
     public class PlayerEditorPresenter : ViewPresenter<PlayerEditorView>
     {
         private readonly int _targetId;
+        
         private readonly IPlayerManager _playerManager;
+        private readonly IPlayerAvatarsRepository _playerAvatarsRepository;
         private readonly Action<PlayerEditSubmitEventArgs> _editCallback;
         
-        public PlayerEditorPresenter(int targetId, Action<PlayerEditSubmitEventArgs> submitCallback, IPlayerManager playerManager)
+        private Sprite _loadedAvatar;
+        
+        public PlayerEditorPresenter(int targetId, Action<PlayerEditSubmitEventArgs> submitCallback, IPlayerManager playerManager,
+            IPlayerAvatarsRepository playerAvatarsRepository)
         {
             _targetId = targetId;
             _playerManager = playerManager;
+            _playerAvatarsRepository = playerAvatarsRepository;
             _editCallback = submitCallback;
         }
         
@@ -21,6 +29,7 @@ namespace OtabapaLeague.Application.UI.Windows
         {
             View.OnSubmitButtonClicked += OnSubmitClicked;
             View.OnCancelButtonClicked += OnCancelClicked;
+            View.OnAvatarButtonClicked += OnAvatarClicked;
             
             if (IsEditingExistingPlayer())
             {
@@ -34,12 +43,14 @@ namespace OtabapaLeague.Application.UI.Windows
 
         public override void OnViewDisabled()
         {
-            
+            View.OnSubmitButtonClicked -= OnSubmitClicked;
+            View.OnCancelButtonClicked -= OnCancelClicked;
+            View.OnAvatarButtonClicked -= OnAvatarClicked;
         }
 
         private void OnSubmitClicked()
         {
-            var resultArgs = new PlayerEditSubmitEventArgs(View.GetNameText(), View.GetTagText(), 0);
+            var resultArgs = new PlayerEditSubmitEventArgs(View.GetNameText(), View.GetTagText(), _loadedAvatar);
             _editCallback?.Invoke(resultArgs);
             View.Close();
         }
@@ -47,6 +58,12 @@ namespace OtabapaLeague.Application.UI.Windows
         private void OnCancelClicked()
         {
             View.Close();
+        }
+
+        private void OnAvatarClicked()
+        {
+            _loadedAvatar = _playerAvatarsRepository.SelectAvatar();
+            View.SetAvatar(_loadedAvatar);
         }
         
         private bool IsEditingExistingPlayer()
@@ -61,6 +78,7 @@ namespace OtabapaLeague.Application.UI.Windows
                 View.SetNameText(player.Name);
                 View.SetTagText(player.Tag);
                 View.SetSubmitButtonText("Save");
+                TryLoadAvatar();
             }
             else
             {
@@ -74,6 +92,14 @@ namespace OtabapaLeague.Application.UI.Windows
             View.SetTagText(string.Empty);
             View.SetSubmitButtonText("Create");
         }
-        
+
+        private void TryLoadAvatar()
+        {
+            var avatar = _playerAvatarsRepository.GetAvatar(_targetId);
+            if (avatar != null)
+            {
+                View.SetAvatar(avatar);
+            }
+        }
     }
 }

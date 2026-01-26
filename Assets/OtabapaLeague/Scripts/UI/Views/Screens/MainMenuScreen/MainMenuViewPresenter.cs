@@ -40,7 +40,7 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
                     _mainUIController.OpenPlayersWindow();
                     break;
                 case MainMenuTabs.Rating:
-                    Debug.Log("Open Rating Tab");
+                    _mainUIController.OpenRatingScreen();
                     break;
             }
         }
@@ -49,6 +49,7 @@ namespace OtabapaLeague.Application.UI.Screens.MainMenuScreen
         {
             _mainUIController.CloseGameWindow();
             _mainUIController.ClosePlayersWindow();
+            _mainUIController.CloseRatingScreen();
         }
     }
 }

@@ -8,10 +8,21 @@
         {
             View = view;
             View.OnOpened += OnViewReady;
-            View.OnClosed += OnViewDisabled;
+            View.OnClosed += OnViewClosed;
+        }
+
+        public virtual void DetachView()
+        {
         }
         
         public abstract void OnViewReady();
         public abstract void OnViewDisabled();
+
+        private void OnViewClosed()
+        {
+            View.OnOpened -= OnViewReady;
+            View.OnClosed -= OnViewDisabled;
+            OnViewDisabled();
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace OtabapaLeague.Application.UI.Elements
         private PlayerViewSimple _playerSimpleView;
         [SerializeField]
         private UIText _scoreText;
+        [SerializeField]
+        private UIImage _playerAvatar;
         
         public void SetPlace(int place)
         {
@@ -25,6 +27,11 @@ namespace OtabapaLeague.Application.UI.Elements
         public void SetScore(int score)
         {
             _scoreText.Text = score.ToString();
+        }
+        
+        public void SetAvatar(Sprite avatar)
+        {
+            _playerAvatar.SetImage(avatar);
         }
     }
 }

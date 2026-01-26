@@ -22,5 +22,8 @@ namespace OtabapaLeague.Application.UI
         
         UniTask OpenGameEditor(Action<GameEditorSubmitArgs> onSubmit);
         UniTask CloseGameEditor();
+
+        UniTask OpenRatingScreen();
+        UniTask CloseRatingScreen();
     }
 }

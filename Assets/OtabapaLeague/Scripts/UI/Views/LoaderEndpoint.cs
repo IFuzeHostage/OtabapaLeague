@@ -33,6 +33,7 @@ namespace OtabapaLeague.Application.UI
         }
 
         protected abstract void InitView();
+        protected abstract void DisposeView();
         
         protected virtual void LoadView()
         {

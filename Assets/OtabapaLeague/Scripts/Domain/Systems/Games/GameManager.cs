@@ -5,6 +5,7 @@ using OtabapaLeague.Data.Player;
 using OtabapaLeague.Scripts.Data;
 using OtabapaLeague.Scripts.Data.GamesRepository;
 using OtabapaLeague.Scripts.Domain.Systems.Players;
+using OtabapaLeague.Scripts.Domain.Systems.Rating;
 
 namespace OtabapaLeague.Scripts.Domain.Systems.Games
 {
@@ -14,12 +15,14 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Games
         public List<GameModel> AllGames => _gamesRepository.AllGames;
 
         private IGamesRepository _gamesRepository;
+        private IRatingCalculator _ratingCalculator;
         private IPlayerManager _playerManager;
         
-        public GameManager(IGamesRepository gamesRepository, IPlayerManager playerManager)
+        public GameManager(IGamesRepository gamesRepository, IPlayerManager playerManager, IRatingCalculator ratingCalculator)
         {
             _gamesRepository = gamesRepository;
             _playerManager = playerManager;
+            _ratingCalculator = ratingCalculator;
         }
         
         public void RegisterGame(PlayerModel firstPlayerModel, PlayerModel secondPlayerModel, 
@@ -33,7 +36,7 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Games
             else
                 result = GameResult.Draw;
 
-            int ratingShift = 20;
+            int ratingShift = _ratingCalculator.CalculateRatingShift(firstPlayerModel.Rating, secondPlayerModel.Rating, result);
 
             ShiftPlayerRating(firstPlayerModel, secondPlayerModel, result, ratingShift).Forget();
             RequestGameRegistration(firstPlayerModel.Id, firstPlayerScore, secondPlayerModel.Id, secondPlayerScore, 

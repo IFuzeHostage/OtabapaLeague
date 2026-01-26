@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OtabapaLeague.Data.Player;
+using OtabapaLeague.Scripts.Data.AvatarsRepository;
 using OtabapaLeague.Scripts.Domain.Systems.Players;
 
 namespace OtabapaLeague.Application.UI.Screens.RatingWindow
@@ -8,10 +9,12 @@ namespace OtabapaLeague.Application.UI.Screens.RatingWindow
     public class RatingScreenPresenter : ViewPresenter<RatingScreenView>
     {
         private readonly IPlayerManager _playerManager;
+        private readonly IPlayerAvatarsRepository _avatarRepository;
         
-        public RatingScreenPresenter(IPlayerManager playerManager)
+        public RatingScreenPresenter(IPlayerManager playerManager, IPlayerAvatarsRepository avatarsRepository)
         {
             _playerManager = playerManager;
+            _avatarRepository = avatarsRepository;
         }
         
         public override void OnViewReady()
@@ -43,7 +46,8 @@ namespace OtabapaLeague.Application.UI.Screens.RatingWindow
 
         private void AddPlayerToView(int place, PlayerModel player)
         {
-            View.AddPlayer(player.Name, player.Tag, place + 1, player.Rating);
+            var avatar = _avatarRepository.GetAvatar(player.Id);
+            View.AddPlayer(player.Name, player.Tag, place + 1, player.Rating, avatar);
         }
     }
 }

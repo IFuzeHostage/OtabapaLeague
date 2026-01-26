@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OtabapaLeague.Data.Player;
+using UnityEngine;
 using Zenject.SpaceFighter;
 
 namespace OtabapaLeague.Scripts.Domain.Systems.Players
@@ -13,7 +14,7 @@ namespace OtabapaLeague.Scripts.Domain.Systems.Players
         
         IEnumerable<PlayerModel> AllPlayers { get; }
         
-        void AddNewPlayer(string name, string tag);
+        void AddNewPlayer(string name, string tag, Sprite avatar);
         void UpdatePlayer(PlayerModel playerModel);
         PlayerModel GetPlayer(int id);
         bool TryGetPlayer(int id, out PlayerModel playerModel);
