@@ -29,7 +29,6 @@ namespace OtabapaLeague.Application.UI
                 return;
             
             await View.Close();
-            _uiHolder.RemoveView(ViewPath);
         }
 
         protected abstract void InitView();

@@ -18,7 +18,7 @@ namespace OtabapaLeague.Domain.Installers
         {
             Container.Bind<IUIHolder>().To<UIHolder>().AsSingle();
 
-            Container.Bind<IRatingCalculator>().To<RatingCalculator>().AsSingle();
+            Container.Bind<IRatingCalculator>().To<EloRatingCalculator>().AsSingle();
             Container.Bind<IDataSerializer>().To<JsonDataSerializer>().AsSingle();
             Container.Bind<IDataSaver>().To<PlayerPrefsDataSaver>().AsSingle();
             Container.Bind<IPlayersRepository>().To<LocalPlayerRepository>().AsSingle();

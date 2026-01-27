@@ -20,6 +20,7 @@ namespace OtabapaLeague.Application.UI.Screens.RatingWindow
             playerView.SetPlace(place);
             playerView.SetScore(rating);
             playerView.SetAvatar(avatar);
+            _playersByPlace.Add(place, playerView);
             return playerView;
         }
         
